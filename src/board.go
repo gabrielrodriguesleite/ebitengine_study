@@ -9,6 +9,16 @@ type Board struct {
 
 func (b *Board) Draw(boardImage *ebiten.Image) {
 	boardImage.Fill(frameColor)
+
+	nonAnimatingTiles := map[*Tile]struct{}{}
+	for t := range b.tiles {
+		nonAnimatingTiles[t] = struct{}{}
+	}
+
+	for t := range nonAnimatingTiles {
+		t.Draw(boardImage)
+	}
+
 }
 
 func (b *Board) Update() error {
@@ -25,6 +35,12 @@ func NewBoard(size int) (*Board, error) {
 	b := &Board{
 		size:  size,
 		tiles: map[*Tile]struct{}{},
+	}
+
+	for i := 0; i < 2; i++ {
+		if err := addRandomTile(b.tiles, b.size); err != nil {
+			return nil, err
+		}
 	}
 
 	return b, nil
