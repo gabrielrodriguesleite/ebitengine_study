@@ -3,17 +3,17 @@ package main
 import (
 	"log"
 
-	game "github.com/gabrielrodriguesleite/ebitengine_study/src"
+	twenty48 "github.com/gabrielrodriguesleite/ebitengine_study/src"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
 func main() {
-	game, err := game.NewGame()
+	game, err := twenty48.NewGame()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// ebiten.SetWindowSize(800, 600)
+	ebiten.SetWindowSize(twenty48.ScreenWidth, twenty48.ScreenHeight)
 	ebiten.SetWindowTitle("My game")
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
